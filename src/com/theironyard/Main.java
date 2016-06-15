@@ -47,7 +47,7 @@ public class Main {
         stmt.execute();
     }
 
-    public static void deleteUser(Connection conn, int id) throws SQLException {
+    public static void deleteUser(Connection conn, Integer id) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("DELETE FROM users WHERE id = ?");
         stmt.setInt(1, id);
         stmt.execute();
@@ -94,7 +94,7 @@ public class Main {
         Spark.delete(
                 "/user/:id",
                 (request, response) -> {
-                    Integer id = Integer.valueOf(request.queryParams(":id"));
+                    Integer id = Integer.valueOf(request.params(":id"));
                     deleteUser(conn, id);
                     return "";
                 }
